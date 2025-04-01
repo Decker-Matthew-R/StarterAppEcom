@@ -32,12 +32,20 @@ flyway {
 	password = 'password'
 	cleanDisabled = false
 }
-task flywayTestDbClean (type: FlywayCleanTask) {
-	url = 'jdbc:postgresql://localhost:5432/fortuna_dev'
-	user = 'dev'
-	password = 'password'
-	cleanDisabled = false
+tasks.register('flywayTestDbClean', FlywayCleanTask) {
+    url = 'jdbc:postgresql://localhost:5432/fortuna_dev'
+    user = 'dev'
+    password = 'password'
+    cleanDisabled = false
 }
+
+tasks.register('flywayJourneyTestDbClean', FlywayCleanTask) {
+    url = 'jdbc:postgresql://localhost:5434/prosperitas_journey'
+    user = 'prosperitas_journey'
+    password = 'password'
+    cleanDisabled = false
+}
+
 
 java {
 	sourceCompatibility = '17'
