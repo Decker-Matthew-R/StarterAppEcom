@@ -33,7 +33,7 @@ flyway {
 	cleanDisabled = false
 }
 tasks.register('flywayTestDbClean', FlywayCleanTask) {
-    url = 'jdbc:postgresql://localhost:5432/fortuna_test'
+    url = 'jdbc:postgresql://localhost:5433/fortuna_test'
     user = 'fortuna_test'
     password = 'password'
     cleanDisabled = false
