@@ -40,8 +40,8 @@ tasks.register('flywayTestDbClean', FlywayCleanTask) {
 }
 
 tasks.register('flywayJourneyTestDbClean', FlywayCleanTask) {
-    url = 'jdbc:postgresql://localhost:5434/prosperitas_journey'
-    user = 'prosperitas_journey'
+    url = 'jdbc:postgresql://localhost:5434/fortuna_journey'
+    user = 'fortuna_journey'
     password = 'password'
     cleanDisabled = false
 }
