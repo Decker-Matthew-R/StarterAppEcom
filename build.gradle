@@ -3,7 +3,7 @@ import org.flywaydb.gradle.task.FlywayMigrateTask
 
 
 plugins {
-	id 'org.springframework.boot' version '3.2.2'
+	id 'org.springframework.boot' version '3.4.4'
 	id 'io.spring.dependency-management' version '1.1.4'
 	id 'java'
 	id 'jacoco'
@@ -33,26 +33,6 @@ flyway {
 	password = 'password'
 	cleanDisabled = false
 }
-tasks.register('flywayTestDbClean', FlywayCleanTask) {
-    url = 'jdbc:postgresql://localhost:5433/fortuna_test'
-    user = 'fortuna_test'
-    password = 'password'
-    cleanDisabled = false
-}
-
-tasks.register('flywayJourneyTestDbClean', FlywayCleanTask) {
-    url = 'jdbc:postgresql://localhost:5434/fortuna_journey'
-    user = 'fortuna_journey'
-    password = 'password'
-    cleanDisabled = false
-}
-tasks.register('flywayTestDbMigrate', FlywayMigrateTask) {
-    url = 'jdbc:postgresql://localhost:5433/fortuna_test'
-    user = 'fortuna_test'
-    password = 'password'
-    cleanDisabled = false
-}
-
 
 java {
 	sourceCompatibility = '17'
@@ -71,16 +51,24 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.flywaydb:flyway-core'
+	implementation 'org.springframework.boot:spring-boot-starter-web:3.4.4'
 	implementation 'org.springframework.session:spring-session-jdbc'
+
+	implementation 'org.flywaydb:flyway-core'
+    implementation 'org.flywaydb:flyway-database-postgresql'
+
+    implementation 'org.yaml:snakeyaml:2.2'
+    implementation 'org.mapstruct:mapstruct:1.5.5.Final'
+
 	compileOnly 'org.projectlombok:lombok'
+
 	runtimeOnly 'org.postgresql:postgresql'
+
 	annotationProcessor 'org.projectlombok:lombok'
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
-	implementation 'org.yaml:snakeyaml:2.2'
-	implementation 'org.mapstruct:mapstruct:1.5.5.Final'
+
 }
 
 application {
@@ -109,6 +97,16 @@ allprojects {
 			options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
 		}
 	}
+}
+tasks.named('resolveMainClassName') {
+    dependsOn tasks.named('copyFrontend')
+}
+tasks.named('jar') {
+    dependsOn('copyFrontend')
+}
+
+tasks.named('compileTestJava') {
+    dependsOn('copyFrontend')
 }
 
 test {
@@ -175,6 +173,26 @@ tasks.register('installPerformance', Exec) {
 	inputs.file(file("performance/package.json"))
 	outputs.dir(file("performance/node_modules"))
 	commandLine("yarn", "--cwd", "performance", "install")
+}
+
+tasks.register('flywayTestDbClean', FlywayCleanTask) {
+    url = 'jdbc:postgresql://localhost:5433/fortuna_test'
+    user = 'fortuna_test'
+    password = 'password'
+    cleanDisabled = false
+}
+
+tasks.register('flywayJourneyTestDbClean', FlywayCleanTask) {
+    url = 'jdbc:postgresql://localhost:5434/fortuna_journey'
+    user = 'fortuna_journey'
+    password = 'password'
+    cleanDisabled = false
+}
+tasks.register('flywayTestDbMigrate', FlywayMigrateTask) {
+    url = 'jdbc:postgresql://localhost:5433/fortuna_test'
+    user = 'fortuna_test'
+    password = 'password'
+    cleanDisabled = false
 }
 
 tasks.register('testPerformance', Exec) {
