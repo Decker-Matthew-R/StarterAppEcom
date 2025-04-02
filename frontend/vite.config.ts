@@ -18,7 +18,14 @@ export default {
     coverage: {
       reporters: ['default', 'lcov'],
       include: ['src/**/*'],
-      exclude: [],
+      exclude: [
+        'src/themes/**',
+        'src/main.tsx',
+        'src/vite-env.d.ts',
+        'src/**/model/**',
+        'src/ApiEndpoints/**',
+        'src/**/__tests__/**',
+      ],
     },
     ...(process.env.CI && { minThreads: 1, maxThreads: 1 }),
   },

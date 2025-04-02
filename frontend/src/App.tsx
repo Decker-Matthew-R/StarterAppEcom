@@ -3,6 +3,9 @@ import reactLogo from './assets/react.svg';
 import viteLogo from './assets/vite.svg';
 import './App.css';
 import { Button, Typography } from '@mui/material';
+import { saveMetricEvent } from './metrics/client/MetricsClient';
+import { METRIC_EVENT_TYPE } from './metrics/model/METRIC_EVENT_TYPE';
+import { MetricEventType } from './metrics/model/MetricEventType';
 
 function App() {
   const [count, setCount] = useState(0);
@@ -35,7 +38,13 @@ function App() {
       <div className='card'>
         <Button
           variant={'contained'}
-          onClick={() => setCount((count) => count + 1)}
+          onClick={() => {
+            setCount((count) => count + 1);
+            saveMetricEvent({
+              event: METRIC_EVENT_TYPE.BUTTON_CLICK,
+              eventMetadata: { triggerId: 'React Button', screen: 'home' },
+            });
+          }}
         >
           count is {count}
         </Button>
