@@ -6,8 +6,13 @@ import axios from 'axios';
  * Use this instead of directly importing axios.
  */
 
+const XSRF_TOKEN_COOKIE_NAME = 'XSRF-TOKEN';
+const XSRF_TOKEN_HEADER_NAME = 'X-XSRF-TOKEN';
+
 axios.defaults.headers.post[`Content-Type`] = `application/json;charset=utf-8`;
-axios.defaults.headers.post[`Access-Control-Allow-Origin`] = `*`;
+axios.defaults.withXSRFToken = true;
+axios.defaults.xsrfCookieName = XSRF_TOKEN_COOKIE_NAME;
+axios.defaults.xsrfHeaderName = XSRF_TOKEN_HEADER_NAME;
 axios.defaults.withCredentials = true;
 export const axiosInstance = () => {
   return axios.create();

@@ -7,3 +7,9 @@ export const saveMetricEvent = (metricEvent: MetricEventType): Promise<void> =>
     .post(API_ENDPOINTS.RECORD_METRIC_EVENT, metricEvent)
     .then(() => {})
     .catch(() => Promise.reject('Failed to capture metric event.'));
+
+// export const pingBackend = (): Promise<void> =>
+//     axiosInstance
+//         .get(API_ENDPOINTS.PING_BACKEND)
+//         .then(() => {})
+//         .catch(() => Promise.reject('Failed to ping backend.'))
