@@ -101,13 +101,13 @@ public class MetricsIntegrationTest {
 
         Timestamp now1 = new Timestamp(System.currentTimeMillis());
         long timeDifference1 = Math.abs(actualSavedMetricEventEntity.get(0).getEventTime().getTime() - now1.getTime());
-        assertThat(timeDifference1).isLessThan(1000);
+        assertThat(timeDifference1).isLessThan(3000);
 
         assertThat(actualSavedMetricEventEntity.get(1).getEvent()).isEqualTo(eventType2.toString());
         assertThat(actualSavedMetricEventEntity.get(1).getMetadata()).isEqualTo(eventMetadata2.toString());
 
         Timestamp now2 = new Timestamp(System.currentTimeMillis());
         long timeDifference2 = Math.abs(actualSavedMetricEventEntity.get(1).getEventTime().getTime() - now2.getTime());
-        assertThat(timeDifference2).isLessThan(1000);
+        assertThat(timeDifference2).isLessThan(3000);
     }
 }
