@@ -14,7 +14,8 @@ function LandingPage() {
       <div>
         <a
           href='https://vitejs.dev'
-          target='_blank' rel="noreferrer"
+          target='_blank'
+          rel='noreferrer'
         >
           <img
             src={viteLogo}
@@ -24,7 +25,8 @@ function LandingPage() {
         </a>
         <a
           href='https://react.dev'
-          target='_blank' rel="noreferrer"
+          target='_blank'
+          rel='noreferrer'
         >
           <img
             src={reactLogo}
