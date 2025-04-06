@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from './assets/vite.svg';
-import './App.css';
+import reactLogo from '../assets/react.svg';
+import viteLogo from '../assets/vite.svg';
+import '../App.css';
 import { Button, Typography } from '@mui/material';
-import { saveMetricEvent } from './metrics/client/MetricsClient';
-import { METRIC_EVENT_TYPE } from './metrics/model/METRIC_EVENT_TYPE';
+import { saveMetricEvent } from '../metrics/client/MetricsClient';
+import { METRIC_EVENT_TYPE } from '../metrics/model/METRIC_EVENT_TYPE';
 
-function App() {
+function LandingPage() {
   const [count, setCount] = useState(0);
 
   return (
@@ -14,7 +14,7 @@ function App() {
       <div>
         <a
           href='https://vitejs.dev'
-          target='_blank'
+          target='_blank' rel="noreferrer"
         >
           <img
             src={viteLogo}
@@ -24,7 +24,7 @@ function App() {
         </a>
         <a
           href='https://react.dev'
-          target='_blank'
+          target='_blank' rel="noreferrer"
         >
           <img
             src={reactLogo}
@@ -69,4 +69,4 @@ function App() {
   );
 }
 
-export default App;
+export default LandingPage;
